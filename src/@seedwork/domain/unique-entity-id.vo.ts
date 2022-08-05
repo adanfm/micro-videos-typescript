@@ -13,6 +13,4 @@ export default class UniqueEntityId {
       throw new InvalidUuidError();
     }
   }
-
-  static create(id: string) {}
 }
