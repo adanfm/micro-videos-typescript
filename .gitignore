@@ -1,2 +1,5 @@
 .history/
 node_modules
+.history/
+tsconfig.tsbuildinfo
+.docker/zsh/history/.zsh_history
