@@ -20,7 +20,8 @@
 		"terminal.integrated.defaultProfile.linux": "zsh"
 	},
 	"extensions": [
-		"eamodio.gitlens"
+		"eamodio.gitlens",
+		"firsttris.vscode-jest-runner"
 	]
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
