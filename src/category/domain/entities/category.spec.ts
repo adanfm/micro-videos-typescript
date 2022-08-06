@@ -69,13 +69,16 @@ describe("Category Tests", () => {
     data.forEach((i: CategoryData) => {
       const category = new Category(i.props, i.id);
       expect(category.id).not.toBeNull();
-      expect(category.id).toBeInstanceOf(UniqueEntityId);
+      expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId);
     });
   });
 
-  test("getter of name prop", () => {
+  test("getter and setter of name prop", () => {
     const category = new Category({ name: "Movie" });
     expect(category.name).toBe("Movie");
+
+    category["name"] = "other name";
+    expect(category.name).toBe("other name");
   });
 
   test("getter and setter of description prop", () => {
@@ -141,5 +144,32 @@ describe("Category Tests", () => {
     });
 
     expect(category.created_at).toBe(created_at);
+  });
+
+  it("should update a category", () => {
+    const category = new Category({ name: "Movie" });
+    category.update("Serie", "some description");
+    expect(category.name).toBe("Serie");
+    expect(category.description).toBe("some description");
+  });
+
+  it("should active a category", () => {
+    const category = new Category({
+      name: "Serie",
+      is_active: false,
+    });
+
+    category.activate();
+    expect(category.is_active).toBeTruthy();
+  });
+
+  it("should desactivate a category", () => {
+    const category = new Category({
+      name: "Serie",
+      is_active: true,
+    });
+
+    category.desactivate();
+    expect(category.is_active).toBeFalsy();
   });
 });
