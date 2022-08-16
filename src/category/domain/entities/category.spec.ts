@@ -3,10 +3,16 @@ import { validate as uuidValidate } from "uuid";
 import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
 import { Category, CategoryProperties } from "./category";
 
-describe("Category Tests", () => {
+//mock
+
+describe("Category Unit Tests", () => {
+  beforeEach(() => {
+    Category.validate = jest.fn();
+  });
   test("constructor of category", () => {
     let category = new Category({ name: "Movie" });
     let props = omit(category.props, "created_at");
+    expect(Category.validate).toHaveBeenCalled();
     expect(props).toStrictEqual({
       name: "Movie",
       description: null,
@@ -149,6 +155,7 @@ describe("Category Tests", () => {
   it("should update a category", () => {
     const category = new Category({ name: "Movie" });
     category.update("Serie", "some description");
+    expect(Category.validate).toHaveBeenCalledTimes(2);
     expect(category.name).toBe("Serie");
     expect(category.description).toBe("some description");
   });
